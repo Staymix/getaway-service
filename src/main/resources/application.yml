@@ -14,19 +14,21 @@ spring:
     gateway:
       discovery:
         locator:
-          enable: true
+          enabled: true
           lower-case-service-id: true
       routes:
-        - id: currency-rate-service
+        - id: currency
           uri: ${cloud.currency-service-url}
           predicates:
             - Path=/currency/**
-        - id: exchange-processing-service
+        - id: processing
           uri: ${cloud.processing-service-url}
           predicates:
             - Path=/processing/**
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     serviceUrl:
       defaultZone: http://${cloud.eureka-host}:8761/eureka
